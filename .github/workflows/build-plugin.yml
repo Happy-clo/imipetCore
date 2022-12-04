@@ -40,3 +40,22 @@ jobs:
         env:
           USERNAME: ${{ github.actor }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get out files zipped
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r out.zip out
+      - name: Get build files zipped
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r build.zip build
+
+      - name: Create a release & Upload release artifacts
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            LICENSE
+            build.zip
+            out.zip

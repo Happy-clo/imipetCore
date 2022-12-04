@@ -37,11 +37,11 @@ jobs:
       - name: Get out files zipped
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r out.zip . out
+          args: zip -qq -r out.zip . -i out
       - name: Get build files zipped
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r build.zip . build
+          args: zip -qq -r build.zip . -i build
 
       - name: Create a release & Upload release artifacts
         uses: "marvinpinto/action-automatic-releases@latest"

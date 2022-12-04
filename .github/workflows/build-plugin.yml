@@ -43,21 +43,27 @@ jobs:
         with:
           java-version: "11"
           distribution: "temurin"
+
       - name: Make sure gradlew is executable
         run: chmod +x ~/work/imipetCore/imipetCore/gradlew
+
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
           arguments: build
 
+  release:
+    runs-on: ubuntu-latest
+    steps:
       - name: Get out files zipped
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r out.zip . -i out
+          args: zip -qq -r out.zip out
+
       - name: Get build files zipped
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r build.zip . -i build
+          args: zip -qq -r build.zip build
 
       - name: Create a release & Upload release artifacts
         uses: "marvinpinto/action-automatic-releases@latest"

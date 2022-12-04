@@ -56,6 +56,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
+      - id: get-release-date
+        name: Get release date
+        run: echo "release_date=$ftime" >> $GITHUB_OUTPUT
+
       - name: Get out files zipped
         uses: montudor/action-zip@v1
         with:
@@ -69,7 +73,7 @@ jobs:
       - name: Create a release & Upload release artifacts
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          automatic_release_tag: "latest"
+          automatic_release_tag: "SNAPSHOT-${{ steps.get-release-date.release_date }}"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |

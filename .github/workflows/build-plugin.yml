@@ -73,11 +73,16 @@ jobs:
       #   with:
       #     args: zip -qq -r build.zip . -i build
 
+      - name: Get outout files zipped
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r out.zip . -i ./build/libs
+
       - name: Create a release & Upload release artifacts
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           automatic_release_tag: "SNAPSHOT-${{ steps.get-release-date.outputs.release_date }}"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
+          prerelease: true
           files: |
-            build/libs/*
+            out.zip

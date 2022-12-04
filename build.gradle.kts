@@ -46,11 +46,13 @@ repositories {
 dependencies {
     compileOnly("public:GermPlugin:4.0.3")
     compileOnly("com.ticxo.modelengine:api:R3.0.1")
-    compileOnly("ink.ptms:nms-all:1.0.0")
-    compileOnly("ink.ptms.core:v11800:11800-minimize:api")
-    compileOnly("ink.ptms.core:v11800:11800-minimize:mapped")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
     compileOnly(fileTree("libs"))
+    // compileOnly("ink.ptms:nms-all:1.0.0")
+    // compileOnly("ink.ptms.core:v11800:11800-minimize:api")
+    // compileOnly("ink.ptms.core:v11800:11800-minimize:mapped")
+    // NOTE: those removed lines are for local builds, but as for Github Actions
+    //   it seems that which cant access ptms.ink:8080
 }
 
 tasks.withType<JavaCompile> {

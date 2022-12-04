@@ -48,9 +48,10 @@ jobs:
         run: chmod +x ~/work/imipetCore/imipetCore/gradlew
 
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-        with:
-          arguments: build
+        # uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        # with:
+        #   arguments: build
+        run: ./gradlew build
 
   release:
     runs-on: ubuntu-latest
@@ -62,15 +63,15 @@ jobs:
           ftime=`date --date='TZ="Asia/Shanghai" now' +"%Y%m%d-%H%M%S"`
           echo "release_date=$ftime" >> $GITHUB_OUTPUT
 
-      - name: Get out files zipped
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r out.zip . -i out
+      # - name: Get out files zipped
+      #   uses: montudor/action-zip@v1
+      #   with:
+      #     args: zip -qq -r out.zip . -i out
 
-      - name: Get build files zipped
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r build.zip . -i build
+      # - name: Get build files zipped
+      #   uses: montudor/action-zip@v1
+      #   with:
+      #     args: zip -qq -r build.zip . -i build
 
       - name: Create a release & Upload release artifacts
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -79,5 +80,4 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
-            build.zip
-            out.zip
+            build/libs/*

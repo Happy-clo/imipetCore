@@ -84,12 +84,12 @@ publishing {
             }
         }
     }
-    // publications {
+    publications {
         // create<MavenPublication>("library") {
         //     from(components["java"])
         //     groupId = project.group.toString()
         // }
-    // }
+    }
 }
 
 sourceSets {

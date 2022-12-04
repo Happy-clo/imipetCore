@@ -58,7 +58,9 @@ jobs:
     steps:
       - id: get-release-date
         name: Get release date
-        run: echo "release_date=$ftime" >> $GITHUB_OUTPUT
+        run: |
+          ftime=`date --date='TZ="Asia/Shanghai" now' +"%Y%m%d-%H%M%S"`
+          echo "release_date=$ftime" >> $GITHUB_OUTPUT
 
       - name: Get out files zipped
         uses: montudor/action-zip@v1
